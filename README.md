@@ -13,11 +13,37 @@ other things, the borrow checker. We will discuss HIR first.
 
 This representation is an abstract syntax tree (AST) created after the program
 being compiled has had its macros expanded, names resolved, and had certain
-high-level surface syntax constructs simplified.
-
+high-level surface syntax constructs simplified. Below is a shortened version
+of the HIR tree representing the following source:
 
 ```
-bodies: {
+fn main() {
+    println!("Hello, world!");
+}
+```
+
+# HIR Tree:
+
+```
+Crate {
+    module: Mod {
+        inner: Span {
+            // ...
+        },
+        item_ids: [
+            // ...
+    },
+    attrs: [],
+    span: Span {
+        // ...
+    },
+    exported_macros: [],
+    items: {
+        // ...
+    },
+    trait_items: {},
+    impl_items: {},
+    bodies: {
         BodyId {
             node_id: NodeId(
                 22
@@ -42,4 +68,7 @@ bodies: {
     ]
 }
 ```
+
+### Notes
+
 
