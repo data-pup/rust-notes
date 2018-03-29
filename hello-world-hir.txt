@@ -1,0 +1,236 @@
+Crate {
+    module: Mod {
+        inner: Span {
+            lo: BytePos(
+                0
+            ),
+            hi: BytePos(
+                44
+            ),
+            ctxt: #0
+        },
+        item_ids: [
+            ItemId {
+                id: NodeId(
+                    2
+                )
+            },
+            ItemId {
+                id: NodeId(
+                    3
+                )
+            },
+            ItemId {
+                id: NodeId(
+                    4
+                )
+            }
+        ]
+    },
+    attrs: [],
+    span: Span {
+        lo: BytePos(
+            0
+        ),
+        hi: BytePos(
+            44
+        ),
+        ctxt: #0
+    },
+    exported_macros: [],
+    items: {
+        NodeId(
+            2
+        ): Item {
+            name: ,
+            id: NodeId(
+                2
+            ),
+            hir_id: HirId {
+                owner: DefIndex(0:1),
+                local_id: ItemLocalId(
+                    0
+                )
+            },
+            attrs: [
+                Attribute {
+                    id: AttrId(
+                        1
+                    ),
+                    style: Outer,
+                    path: path(prelude_import),
+                    tokens: TokenStream {
+                        kind: Empty
+                    },
+                    is_sugared_doc: false,
+                    span: Span {
+                        lo: BytePos(
+                            0
+                        ),
+                        hi: BytePos(
+                            0
+                        ),
+                        ctxt: #1
+                    }
+                }
+            ],
+            node: ItemUse(
+                path(std::prelude::v1),
+                Glob
+            ),
+            vis: Inherited,
+            span: Span {
+                lo: BytePos(
+                    0
+                ),
+                hi: BytePos(
+                    0
+                ),
+                ctxt: #1
+            }
+        },
+        NodeId(
+            3
+        ): Item {
+            name: std,
+            id: NodeId(
+                3
+            ),
+            hir_id: HirId {
+                owner: DefIndex(0:2),
+                local_id: ItemLocalId(
+                    0
+                )
+            },
+            attrs: [
+                Attribute {
+                    id: AttrId(
+                        0
+                    ),
+                    style: Outer,
+                    path: path(macro_use),
+                    tokens: TokenStream {
+                        kind: Empty
+                    },
+                    is_sugared_doc: false,
+                    span: Span {
+                        lo: BytePos(
+                            0
+                        ),
+                        hi: BytePos(
+                            0
+                        ),
+                        ctxt: #0
+                    }
+                }
+            ],
+            node: ItemExternCrate(
+                None
+            ),
+            vis: Inherited,
+            span: Span {
+                lo: BytePos(
+                    0
+                ),
+                hi: BytePos(
+                    0
+                ),
+                ctxt: #0
+            }
+        },
+        NodeId(
+            4
+        ): Item {
+            name: main,
+            id: NodeId(
+                4
+            ),
+            hir_id: HirId {
+                owner: DefIndex(0:3),
+                local_id: ItemLocalId(
+                    0
+                )
+            },
+            attrs: [],
+            node: ItemFn(
+                FnDecl {
+                    inputs: [],
+                    output: DefaultReturn(
+                        Span {
+                            lo: BytePos(
+                                10
+                            ),
+                            hi: BytePos(
+                                10
+                            ),
+                            ctxt: #0
+                        }
+                    ),
+                    variadic: false,
+                    has_implicit_self: false
+                },
+                Normal,
+                NotConst,
+                Rust,
+                Generics {
+                    params: [],
+                    where_clause: WhereClause {
+                        id: NodeId(
+                            5
+                        ),
+                        predicates: []
+                    },
+                    span: Span {
+                        lo: BytePos(
+                            0
+                        ),
+                        hi: BytePos(
+                            0
+                        ),
+                        ctxt: #0
+                    }
+                },
+                BodyId {
+                    node_id: NodeId(
+                        22
+                    )
+                }
+            ),
+            vis: Inherited,
+            span: Span {
+                lo: BytePos(
+                    0
+                ),
+                hi: BytePos(
+                    44
+                ),
+                ctxt: #0
+            }
+        }
+    },
+    trait_items: {},
+    impl_items: {},
+    bodies: {
+        BodyId {
+            node_id: NodeId(
+                22
+            )
+        }: Body {
+            arguments: [],
+            value: expr(22: {
+                ::io::_print(<::fmt::Arguments>::new_v1(&["Hello, world!\n"],
+                                                        &match () { () => [], }));
+            }),
+            is_generator: false
+        }
+    },
+    trait_impls: {},
+    trait_auto_impl: {},
+    body_ids: [
+        BodyId {
+            node_id: NodeId(
+                22
+            )
+        }
+    ]
+}
