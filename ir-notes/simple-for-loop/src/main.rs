@@ -1,3 +1,11 @@
+mod print_loop {
+    pub fn foo() {
+        for i in 1..10 {
+            println!("{}", i);
+        }
+    }
+}
+
 fn main() {
-    println!("Hello, world!");
+    print_loop::foo();
 }
