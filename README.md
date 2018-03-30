@@ -71,4 +71,18 @@ Crate {
 
 ### Notes
 
+Note that the top-level structure is the `Crate`. In our case, we have a single
+module. The call to the `println!` macro can be seen in the `bodies` section.
+This might seem like a complex object relative to the simplicity of the
+program, but the `Crate` structure exposes some interfaces to allow for easier
+access to different parts of the AST.
+
+This structure also means that incremental compilation is easier. Becuase giving
+access to a body only provides the corresponding node ID, the compiler can
+record access dependencies.
+
+This is only a cursory overview of HIR, but it is helpful to visualize what
+kind of structure we will commonly be working with inside of the compiler code.
+
+## Mid-level Intermediate Representation
 
