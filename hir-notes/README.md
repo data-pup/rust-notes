@@ -7,7 +7,7 @@ into a binary that can be used by the computer.
 In Rust, there are two levels of intermediate representation. The High-level
 IR (HIR) is the primary IR used in `rustc`. The Mid-level IR (MIR) is the
 second representation, which is a lower-level representation used by, among
-other things, the borrow checker. We will discuss HIR first.
+other things, the borrow checker. We will discuss HIR in this section.
 
 ## High-level Intermediate Representation (HIR)
 
@@ -83,6 +83,4 @@ record access dependencies.
 
 This is only a cursory overview of HIR, but it is helpful to visualize what
 kind of structure we will commonly be working with inside of the compiler code.
-
-## Mid-level Intermediate Representation
 
