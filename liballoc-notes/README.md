@@ -133,5 +133,144 @@ the source. Even more useful, the documentation at the top of the file
 contains an example implementation of Dijkstra's Algorithm. This algorithm
 solves the shortest path problem for a directed graph.
 
-...
+First, we declare a `State` struct, and implement the `Ord` and `PartialOrd`
+traits on this struct.
+
+```rust
+#[derive(Copy, Clone, Eq, PartialEq)]
+struct State {
+  cost: usize,
+  position: usize,
+}
+
+impl Ord for State {
+  fn cmp(&self, other: &State) -> Ordering {
+    other.cost.cmp(&self.cost)
+      .then_with(|| self.position.cmp(&other.position))
+  }
+}
+
+impl PartialOrd for State {
+  fn partial_cmp(&self, other: &State) -> Option<Ordering> {
+    Some(self.cmp(other))
+  }
+}
+```
+
+Note that the Copy, Clone, Eq, and PartialEq traits can be derived
+automatically, so that we do not need to manually implement simple boilerplate.
+The ordering traits will allow us to compare the values between two states.
+
+Next we implement an `Edge`, where each node is represented as a usize for
+simplicity. Once this is defined, we can implement the pathfinding algorithm.
+
+```rust
+struct Edge {
+  node: usize,
+  cost: usize,
+}
+```
+
+Using the structures we have now defined, this is how we can implement
+Dijkstra's Algorithm:
+
+```rust
+fn shortest_path(adj_list: &Vec<Vec<Edge>>, start: usize, goal: usize) -> Option<usize> {
+  let mut dist: Vec<_> = (0..adj_list.len()).map(|_| usize:MAX).collect();
+
+  let mut heap = BinaryHeap::new();
+  dist[start] = 0;
+  heap.push(State {cost: 0, position: start});
+
+  while let Some(State { cost, position }) = heap.pop() {
+    if position == goal { return Some(cost); }
+
+    if cost > dist[position] { continue; }
+
+    for edge in &adj_list[position] {
+      let next = State { cost: cost + edge.cost, position: edge.node };
+
+      if next.cost < dist [next.position] {
+        heap.push(next);
+        dist[next.position] = next.cost;
+      }
+    }
+  }
+
+  None
+}
+```
+
+This example contains some extra explanatory comments in the documentation,
+which I have stripped out here for the sake of brevity. Next, I would like
+to cover some of the implementation details in the binary heap class, and
+see what it can teach us about Rust collections.
+
+## Binary Heap Standard Library Implementation
+
+For this section, we will continue reading through the contents of
+`src/liballoc/binary_heap.rs`, and progress to the heap implementation.
+Let's start with the struct definition, which is relatively straightforward.
+
+Note that this file is quite large, so we will only cover this class from
+a high-level perspective. We will focus specifically on the `push` and `pop`
+methods, and what makes them an interesting case study in Rust.
+
+```rust
+struct BinaryHeap<T> {
+  data: Vec<T>,
+}
+```
+
+As we read in the documentation earlier, many of these abstract structures
+are built on top of a simple vector. The binary heap follows this pattern, and
+only contains a vector internally. Simple enough, so let's next view the `impl`
+blocks and see how this is used to expose a binary heap.
+
+```rust
+impl<T: Ord> BinaryHeap<T> {
+  pub fn new() -> BinaryHeap<T> {
+    BinaryHeap { data: vec![] }
+  }
+
+
+  pub fn peek(&self) -> Option<&T> {
+    self.data.get(0)
+  }
+
+  pub fn push(&mut self, item: T) {
+    let old_len = self.len();
+    self.data.push(item);
+    self.sift_up(0, old_len);
+  }
+
+  pub fn pop(&mut self) -> Option<T> {
+    self.data.pop().map(|mut item| {
+      if !self.is_empty() {
+        swap(&mut item, &mut self.data[0]);
+        self.sift_down_to_bottom(0);
+      }
+      item
+    })
+  }
+}
+```
+
+Notice that the `peek` method returns an `Option<&T>`. This makes sense, when
+you consider that it should only return a value if the heap is not empty, and
+the value returned should be an immutable reference if it does exist.
+
+`push` and `pop` both involve an owned `T` type, which must be a type that
+implements the `Ord` trait. These each make use of a private helper function
+to sift a new value into its correct position, and to sort after the removal
+of a new value, which is where some of the interesting consequences of Rust's
+memory safety features occur.
+
+### Sifting Up
+
+Let's look at the code for `BinaryHeap::sift_up` next, to understand how the
+heap is sorted after a new value has been appended to the data vector.
+
+```rust
+```
 
