@@ -1,0 +1,410 @@
+Crate {
+    module: Mod {
+        inner: Span {
+            lo: BytePos(
+                0
+            ),
+            hi: BytePos(
+                147
+            ),
+            ctxt: #0
+        },
+        item_ids: [
+            ItemId {
+                id: NodeId(
+                    2
+                )
+            },
+            ItemId {
+                id: NodeId(
+                    3
+                )
+            },
+            ItemId {
+                id: NodeId(
+                    4
+                )
+            },
+            ItemId {
+                id: NodeId(
+                    14
+                )
+            }
+        ]
+    },
+    attrs: [],
+    span: Span {
+        lo: BytePos(
+            0
+        ),
+        hi: BytePos(
+            147
+        ),
+        ctxt: #0
+    },
+    exported_macros: [],
+    items: {
+        NodeId(
+            2
+        ): Item {
+            name: ,
+            id: NodeId(
+                2
+            ),
+            hir_id: HirId {
+                owner: DefIndex(0:1),
+                local_id: ItemLocalId(
+                    0
+                )
+            },
+            attrs: [
+                Attribute {
+                    id: AttrId(
+                        1
+                    ),
+                    style: Outer,
+                    path: path(prelude_import),
+                    tokens: TokenStream {
+                        kind: Empty
+                    },
+                    is_sugared_doc: false,
+                    span: Span {
+                        lo: BytePos(
+                            0
+                        ),
+                        hi: BytePos(
+                            0
+                        ),
+                        ctxt: #1
+                    }
+                }
+            ],
+            node: ItemUse(
+                path(std::prelude::v1),
+                Glob
+            ),
+            vis: Inherited,
+            span: Span {
+                lo: BytePos(
+                    0
+                ),
+                hi: BytePos(
+                    0
+                ),
+                ctxt: #1
+            }
+        },
+        NodeId(
+            3
+        ): Item {
+            name: std,
+            id: NodeId(
+                3
+            ),
+            hir_id: HirId {
+                owner: DefIndex(0:2),
+                local_id: ItemLocalId(
+                    0
+                )
+            },
+            attrs: [
+                Attribute {
+                    id: AttrId(
+                        0
+                    ),
+                    style: Outer,
+                    path: path(macro_use),
+                    tokens: TokenStream {
+                        kind: Empty
+                    },
+                    is_sugared_doc: false,
+                    span: Span {
+                        lo: BytePos(
+                            0
+                        ),
+                        hi: BytePos(
+                            0
+                        ),
+                        ctxt: #0
+                    }
+                }
+            ],
+            node: ItemExternCrate(
+                None
+            ),
+            vis: Inherited,
+            span: Span {
+                lo: BytePos(
+                    0
+                ),
+                hi: BytePos(
+                    0
+                ),
+                ctxt: #0
+            }
+        },
+        NodeId(
+            4
+        ): Item {
+            name: print_loop,
+            id: NodeId(
+                4
+            ),
+            hir_id: HirId {
+                owner: DefIndex(0:3),
+                local_id: ItemLocalId(
+                    0
+                )
+            },
+            attrs: [],
+            node: ItemMod(
+                Mod {
+                    inner: Span {
+                        lo: BytePos(
+                            21
+                        ),
+                        hi: BytePos(
+                            109
+                        ),
+                        ctxt: #0
+                    },
+                    item_ids: [
+                        ItemId {
+                            id: NodeId(
+                                5
+                            )
+                        }
+                    ]
+                }
+            ),
+            vis: Inherited,
+            span: Span {
+                lo: BytePos(
+                    0
+                ),
+                hi: BytePos(
+                    109
+                ),
+                ctxt: #0
+            }
+        },
+        NodeId(
+            5
+        ): Item {
+            name: foo,
+            id: NodeId(
+                5
+            ),
+            hir_id: HirId {
+                owner: DefIndex(0:4),
+                local_id: ItemLocalId(
+                    0
+                )
+            },
+            attrs: [],
+            node: ItemFn(
+                FnDecl {
+                    inputs: [],
+                    output: DefaultReturn(
+                        Span {
+                            lo: BytePos(
+                                34
+                            ),
+                            hi: BytePos(
+                                34
+                            ),
+                            ctxt: #0
+                        }
+                    ),
+                    variadic: false,
+                    has_implicit_self: false
+                },
+                Normal,
+                NotConst,
+                Rust,
+                Generics {
+                    params: [],
+                    where_clause: WhereClause {
+                        id: NodeId(
+                            6
+                        ),
+                        predicates: []
+                    },
+                    span: Span {
+                        lo: BytePos(
+                            0
+                        ),
+                        hi: BytePos(
+                            0
+                        ),
+                        ctxt: #0
+                    }
+                },
+                BodyId {
+                    node_id: NodeId(
+                        90
+                    )
+                }
+            ),
+            vis: Public,
+            span: Span {
+                lo: BytePos(
+                    21
+                ),
+                hi: BytePos(
+                    107
+                ),
+                ctxt: #0
+            }
+        },
+        NodeId(
+            14
+        ): Item {
+            name: main,
+            id: NodeId(
+                14
+            ),
+            hir_id: HirId {
+                owner: DefIndex(0:5),
+                local_id: ItemLocalId(
+                    0
+                )
+            },
+            attrs: [],
+            node: ItemFn(
+                FnDecl {
+                    inputs: [],
+                    output: DefaultReturn(
+                        Span {
+                            lo: BytePos(
+                                121
+                            ),
+                            hi: BytePos(
+                                121
+                            ),
+                            ctxt: #0
+                        }
+                    ),
+                    variadic: false,
+                    has_implicit_self: false
+                },
+                Normal,
+                NotConst,
+                Rust,
+                Generics {
+                    params: [],
+                    where_clause: WhereClause {
+                        id: NodeId(
+                            15
+                        ),
+                        predicates: []
+                    },
+                    span: Span {
+                        lo: BytePos(
+                            0
+                        ),
+                        hi: BytePos(
+                            0
+                        ),
+                        ctxt: #0
+                    }
+                },
+                BodyId {
+                    node_id: NodeId(
+                        91
+                    )
+                }
+            ),
+            vis: Inherited,
+            span: Span {
+                lo: BytePos(
+                    111
+                ),
+                hi: BytePos(
+                    147
+                ),
+                ctxt: #0
+            }
+        }
+    },
+    trait_items: {},
+    impl_items: {},
+    bodies: {
+        BodyId {
+            node_id: NodeId(
+                90
+            )
+        }: Body {
+            arguments: [],
+            value: expr(90: {
+                {
+                    let _result =
+                        match ::std::iter::IntoIterator::into_iter(::std::ops::Range{start:
+                                                                                         1,
+                                                                                     end:
+                                                                                         10,})
+                            {
+                            mut iter =>
+                            loop  {
+                                let mut __next;
+                                match ::std::iter::Iterator::next(&mut iter) {
+                                    ::std::option::Option::Some(val) => __next = val,
+                                    ::std::option::Option::None => break ,
+                                }
+                                let i = __next;
+                                {
+                                    ::io::_print(<::fmt::Arguments>::new_v1_formatted(&["",
+                                                                                        "\n"],
+                                                                                      &match (&i,)
+                                                                                           {
+                                                                                           (__arg0,)
+                                                                                           =>
+                                                                                           [<::fmt::ArgumentV1>::new(__arg0,
+                                                                                                                     ::fmt::Display::fmt)],
+                                                                                       },
+                                                                                      &[::fmt::rt::v1::Argument{position:
+                                                                                                                    ::fmt::rt::v1::Position::At(0usize),
+                                                                                                                format:
+                                                                                                                    ::fmt::rt::v1::FormatSpec{fill:
+                                                                                                                                                  ' ',
+                                                                                                                                              align:
+                                                                                                                                                  ::fmt::rt::v1::Alignment::Unknown,
+                                                                                                                                              flags:
+                                                                                                                                                  0u32,
+                                                                                                                                              precision:
+                                                                                                                                                  ::fmt::rt::v1::Count::Implied,
+                                                                                                                                              width:
+                                                                                                                                                  ::fmt::rt::v1::Count::Implied,},}]));
+                                }
+                            },
+                        };
+                    _result
+                }
+            }),
+            is_generator: false
+        },
+        BodyId {
+            node_id: NodeId(
+                91
+            )
+        }: Body {
+            arguments: [],
+            value: expr(91: { print_loop::foo(); }),
+            is_generator: false
+        }
+    },
+    trait_impls: {},
+    trait_auto_impl: {},
+    body_ids: [
+        BodyId {
+            node_id: NodeId(
+                90
+            )
+        },
+        BodyId {
+            node_id: NodeId(
+                91
+            )
+        }
+    ]
+}
