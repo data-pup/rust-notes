@@ -201,76 +201,28 @@ fn shortest_path(adj_list: &Vec<Vec<Edge>>, start: usize, goal: usize) -> Option
 }
 ```
 
-This example contains some extra explanatory comments in the documentation,
-which I have stripped out here for the sake of brevity. Next, I would like
-to cover some of the implementation details in the binary heap class, and
-see what it can teach us about Rust collections.
-
-## Binary Heap Standard Library Implementation
-
-For this section, we will continue reading through the contents of
-`src/liballoc/binary_heap.rs`, and progress to the heap implementation.
-Let's start with the struct definition, which is relatively straightforward.
-
-Note that this file is quite large, so we will only cover this class from
-a high-level perspective. We will focus specifically on the `push` and `pop`
-methods, and what makes them an interesting case study in Rust.
+There are some lines here that I would like to analyze further. Let's start
+with this line, which is probably the busiest line in the function logically.
 
 ```rust
-struct BinaryHeap<T> {
-  data: Vec<T>,
-}
+let mut dist: Vec<_> = (0..adj_list.len()).map(|_| usize:MAX).collect();
 ```
 
-As we read in the documentation earlier, many of these abstract structures
-are built on top of a simple vector. The binary heap follows this pattern, and
-only contains a vector internally. Simple enough, so let's next view the `impl`
-blocks and see how this is used to expose a binary heap.
+The `dish` vector is used to store the distances to each node starting from
+the `start` node. Overall, this line initializes an element for each node
+in the graph (represented by a `Vec<Edge>` in `adj_list`) to the maximum usize
+value (using a closure given to `map(..)`), and collects them into a `Vec`
+object using `collect`.
+
+Next, let's look at the while loop below.
 
 ```rust
-impl<T: Ord> BinaryHeap<T> {
-  pub fn new() -> BinaryHeap<T> {
-    BinaryHeap { data: vec![] }
+  while let Some(State { cost, position }) = heap.pop() {
+    // ...
   }
-
-
-  pub fn peek(&self) -> Option<&T> {
-    self.data.get(0)
-  }
-
-  pub fn push(&mut self, item: T) {
-    let old_len = self.len();
-    self.data.push(item);
-    self.sift_up(0, old_len);
-  }
-
-  pub fn pop(&mut self) -> Option<T> {
-    self.data.pop().map(|mut item| {
-      if !self.is_empty() {
-        swap(&mut item, &mut self.data[0]);
-        self.sift_down_to_bottom(0);
-      }
-      item
-    })
-  }
-}
 ```
 
-Notice that the `peek` method returns an `Option<&T>`. This makes sense, when
-you consider that it should only return a value if the heap is not empty, and
-the value returned should be an immutable reference if it does exist.
-
-`push` and `pop` both involve an owned `T` type, which must be a type that
-implements the `Ord` trait. These each make use of a private helper function
-to sift a new value into its correct position, and to sort after the removal
-of a new value, which is where some of the interesting consequences of Rust's
-memory safety features occur.
-
-### Sifting Up
-
-Let's look at the code for `BinaryHeap::sift_up` next, to understand how the
-heap is sorted after a new value has been appended to the data vector.
-
-```rust
-```
+This loop will attempt to destructure an `Option<State>` into the `const` and
+`position` variables given by `heap.pop()`. When the pop function returns
+`None`, this loop will terminate. Neat!
 
