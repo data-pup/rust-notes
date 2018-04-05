@@ -32,3 +32,26 @@ file is only read once. These are the places where crate data is read.
 Writing `package.json`, and running `wasm-bindgen` are the two places where
 some information must be read from the `Cargo.toml` file.
 
+### How is Crate Data Read?
+
+The structs defined to represent the content of `Cargo.toml` are here:
+
+```
+#[derive(Deserialize)]
+pub struct CargoManifest {
+  package: CargoPackage,
+}
+
+#[derive(Deserialize)]
+pub struct CargoPackage {
+  name: String,
+  authors: Vec<String>,
+  description: Option<String>,
+  version: String,
+  license: Option<String>,
+  repository: Option<String>,
+}
+```
+
+NOTE: Review what the `Deserialize` trait does.
+
