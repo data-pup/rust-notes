@@ -92,9 +92,26 @@ dfg.rs contains the DataFlowGraph struct.
 This contains a `replace_with_aliases` method, which should do what I need to
 replace the nondeterminate value with a canonical version of the NaN result.
 
-### MISC:
+### Debugging Problems:
 
-Currently a very rough draft of the pass is in place, still needs to be edited
-to pass the test bench, this is not performing well and seems to cause a
-type failure in the wasm test suite.
+As of commit aa625633c935394ad1d065db73a20890936c4aef, I am getting closer to
+a solution to this. While all of the codegen test suites pass, the following
+error is thrown when I run the cretonne file-level tests.
+
+NOTE: This is not yet adding the canonical NaN value, just the general control
+flow that will be expected once I add a function to fetch/return a constant
+value that will be used in place, assuming the result -is- a NaN value.
+
+```
+FAIL filetests/wasm/f32-arith.cton: compile(%f32_sqrt): inst3: arg 0 (v2) with type fflags failed to satisfy type set ValueTypeSet { lanes: BitSet(1), ints: BitSet(120), floats: BitSet(0), bools: BitSet(121) }
+inst3: v3 = select.f32 v2, v1, v1
+
+function %f32_sqrt(f32) -> f32 fast {
+  ebb0(v0: f32):
+  v1 = sqrt v0
+  v2 = ffcmp v1, v1
+  v3 = select v2, v1, v1
+  return v1
+}
+```
 
