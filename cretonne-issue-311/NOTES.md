@@ -115,3 +115,18 @@ function %f32_sqrt(f32) -> f32 fast {
 }
 ```
 
+After further work, I am getting closer. The return value is still not corect
+in the function below, that will need some further work? However, the
+canonicalizing code -seems- to be coming together.
+
+```
+function %f32_sqrt(f32) -> f32 fast {
+  ebb0(v0: f32):
+  v1 = sqrt v0
+  v2 = ffcmp v1, v1
+  v3 = f32const +sNaN:0x1
+  v4 = select v2, v3, v1
+  return v1
+}
+```
+
