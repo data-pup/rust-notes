@@ -85,5 +85,16 @@ this.
 point values respectively. These are found in ir::immediates. Note that this
 will be found in the `target` directory after building.
 
+### Replacing result with alias to canonicalized result
 
+dfg.rs contains the DataFlowGraph struct.
+
+This contains a `replace_with_aliases` method, which should do what I need to
+replace the nondeterminate value with a canonical version of the NaN result.
+
+### MISC:
+
+Currently a very rough draft of the pass is in place, still needs to be edited
+to pass the test bench, this is not performing well and seems to cause a
+type failure in the wasm test suite.
 
