@@ -39,3 +39,13 @@ attempt to access the name field to get the crate name.
 
 Thinking about how I can work around this.
 
+On a different note, I can refactor the function used to read the `Cargo.toml`
+file so that it will work with the std::env::args() object, and iterate
+through each argument and check for a path. Use `skip(2)` to skip the initial
+`wasm-pack` command and the subcommand. The first valid path found should be
+used as the location for the `Cargo.toml` file.
+
+Right now I am placing the static variable in the `manifest.rs` file, but this
+may be moved later. Not sure yet, but this will either be placed here or in
+`command.rs`.
+
