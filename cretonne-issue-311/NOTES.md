@@ -130,3 +130,13 @@ function %f32_sqrt(f32) -> f32 fast {
 }
 ```
 
+### Aliasing Result
+
+The next step is wiring in the new result value. We do not want to rewire
+all of the uses of the old value, because `fcmp` and `select` need to work
+with this value still.
+
+We can use `dfg`'s `replace_result` method the replace the result value of
+the arithmetic instruction with a new `Value`. Then we can use `pos.ins()`'s
+`with_result` when inserting the `select` using the original `Value`.
+
