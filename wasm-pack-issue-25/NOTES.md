@@ -49,3 +49,17 @@ Right now I am placing the static variable in the `manifest.rs` file, but this
 may be moved later. Not sure yet, but this will either be placed here or in
 `command.rs`.
 
+## Update 05-04
+
+I worked on this more this morning, and noticed some unexpected problems
+that seem to pop up by using `lazy_static`.
+
+Question: Should both of these commands work? If only one of these is required,
+and the path is expected to always come either after, or before the options
+for the subcommand, then we can proceed pretty easily.
+
+```
+wasm-pack init ./my/path --scope HEY   # Path first.
+wasm-pack init --scope HEY ./my/path/  # Options first.
+```
+
