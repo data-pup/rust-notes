@@ -63,3 +63,16 @@ wasm-pack init ./my/path --scope HEY   # Path first.
 wasm-pack init --scope HEY ./my/path/  # Options first.
 ```
 
+A concern I had about switching to the lazy static variable is that it in a
+sense implicitly discards the `path` field of the command object, which could
+lead to a confusing bug down the road.
+
+This also makes testing some of the `manifest` functions a little difficult,
+if we do not want to put unit tests directly into the files, relying instead
+on integration tests.
+
+One other route that we could consider is wrapping the commands into a struct
+to represent the runtime context. This could lazily evaluate the `Cargo.toml`
+contents as well, and avoid the issue of adding a noisy list of arguments to
+the command functions.
+
