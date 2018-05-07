@@ -52,7 +52,39 @@ This is the commit that actually adds the `twiggy monos` subcommand itself,
 after the previous commits added the groundwork. As such, this one will be
 covered in slightly more detail.
 
+### Monos
 
+The following structs are added to `analyze/analyze.rs`, which represent
+monomorphizations. `Monos` is really just a vector of entries. The entry
+struct is a string (the name?), the id value(s) of the function, total size,
+and the potential savings.
+
+Note: We are not going to cover the monomorphization optimization in too much
+detail, just to steps that went into adding this to `twiggy` to get a handle
+on how we will add the `garbage` command.
+
+```rust
+#[derive(Debug)]
+struct Monos {
+    monos: Vec<MonosEntry>,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+struct MonosEntry {
+    generic: String,
+    insts: Vec<ir::Id>,
+    total: u32,
+    approx_potential_savings: u32,
+}
+```
+
+The `Monos` struct implements the `Emit` trait. We will cover this later.
+
+The other major changes are in `opt/definitions.rs` and `opt/opt.rs`.
+`opt.rs` defines options for running `twiggy`. We will need to add a new
+struct to the definitions file to define the options that the garbage
+subcommand can run under. The changes in `opt.rs` are mostly just a matter
+of adding an extra branch to match statements and so forth.
 
 # The `analyze` crate
 
@@ -72,4 +104,11 @@ struct Table {
 # The `twiggy_ir` crate
 
 To do...
+
+# The external `petgraph` crate
+
+The `petgraph` crate is used to traverse the Dfs, so this is also worth
+reviewing.
+
+(Todo...)
 
