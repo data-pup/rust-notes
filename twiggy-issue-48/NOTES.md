@@ -107,8 +107,23 @@ To do...
 
 # The external `petgraph` crate
 
-The `petgraph` crate is used to traverse the Dfs, so this is also worth
+The `petgraph` crate is used to perform a Dfs, so this is also worth
 reviewing.
 
 (Todo...)
+
+## Dfs Traversal Example
+
+This is an example of how to perform a depth-first search using the petgraph
+visit implementation. This comes from the test bench. We will perform a similar
+operation to traverse the IR when finding unreachable items.
+
+```rust
+let mut dfs = Dfs::new(&gr, a);
+while let Some(next) = dfs.next(&gr) {
+  println!("dfs visit => {:?}, weight={:?}", next, &gr[next]);
+}
+```
+
+This struct is defined at `src/visit/traversal.rs` within the `petgraph` crate.
 
