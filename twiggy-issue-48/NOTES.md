@@ -34,15 +34,25 @@ rustc +nightly -g --target wasm32-unknown-unknown monos.rs -o monos.wasm -C lto=
 
 ### 5b23f531d0b33d4eaf913bd2201893ee18fb70e2
 
-Todo ...
+This commit adds some extra logic in `parser/wasm.rs` to properly index
+function call edges and global reference edges.
 
 ### fe437dda2f6d884fe4dc6531b16dcf7bb6ebc2be
 
-Todo ...
+This commit largely deals with the `Code` struct inside of `ir/ir.rs`.
+The idea here being that it extracts generic function names from
+monomorphizations. To quote the comments added here, "this is some hacky,
+ad-hoc parsing shit!" So, I am not going to let myself get too bogged down
+in the details of this commit, and accept that it is doing fancy stuff
+regarding monomorphizations.
 
-### aa3330d9981d6568550c86a55c50795fc954380c
+## Commit aa3330d9981d6568550c86a55c50795fc954380c
 
-Todo ...
+This is the commit that actually adds the `twiggy monos` subcommand itself,
+after the previous commits added the groundwork. As such, this one will be
+covered in slightly more detail.
+
+
 
 # The `analyze` crate
 
