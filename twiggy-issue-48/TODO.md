@@ -11,3 +11,10 @@
 *  Add the source and resulting `.wasm` binary to the project under the test
    fixtures directory.
 
+## Implementation
+
+*  Traverse items starting from the meta-root using `petgraph::visit::Dfs` (reachable)
+*  Traverse all items, filter for items that are not transitively reachable (garbage)
+*  Print information about the
+
+
