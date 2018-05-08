@@ -11,6 +11,11 @@
 *  Add the source and resulting `.wasm` binary to the project under the test
    fixtures directory.
 
+## New struct
+
+Add a new struct, to represent a collection of unreachable items, as well as
+a single unreachable item. The struct will need to implement the `Emit` trait.
+
 ## Options
 
 We will need to create a new item in the Options enum defined in `twiggy_opt`.
