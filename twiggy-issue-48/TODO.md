@@ -15,6 +15,6 @@
 
 *  Traverse items starting from the meta-root using `petgraph::visit::Dfs` (reachable)
 *  Traverse all items, filter for items that are not transitively reachable (garbage)
-*  Print information about the
+*  Print information about the unreachable items.
 
 

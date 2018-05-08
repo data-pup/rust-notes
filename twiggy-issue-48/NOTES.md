@@ -103,7 +103,55 @@ struct Table {
 
 # The `twiggy_ir` crate
 
-To do...
+The important objects that we will need to consider from the `twiggy_ir` crate
+are `Item` and `Items`. An item is, surprise, an item in the binary.
+
+```rust
+/// An item in the binary.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Item {
+  id: Id,
+  name: String,
+  size: u32,
+  kind: ItemKind,
+}
+```
+
+The items collection is defined like so:
+
+```rust
+#[derive(Debug)]
+pub struct Items {
+  size: u32,
+  dominator_tree: Option<BTreeMap<Id, Vec<Id>>>,
+  retained_sizes: Option<BTreeMap<Id, u32>>,
+  predecessors: Option<BTreeMap<Id, Vec<Id>>>,
+  items: Frozen<BTreeMap<Id, Item>>,
+  edges: Frozen<BTreeMap<Id, Vec<Id>>>,
+  roots: Frozen<BTreeSet<Id>>,
+  meta_root: Id,
+}
+```
+
+## Getting a list of items
+
+We won't need to worry about the details of the IR crate to fix this issue,
+the `run` function in `twiggy/twiggy.rs` creates a list of items using this
+line.
+
+```rust
+let mut items = parser::read_and_parse(opts.input())?;
+```
+
+The line above creates an `ir:Items` collection.
+
+Each of the subcommand functions in `analyze.rs` is defined with a signature
+that looks something like this:
+
+```rust
+pub fn foo(items: &mut ir::Items, opts: &opt::Monos) -> Result<Box<traits::Emit>, traits::Error> {
+}
+```
 
 # The external `petgraph` crate
 
