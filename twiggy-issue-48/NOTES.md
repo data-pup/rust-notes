@@ -175,3 +175,35 @@ while let Some(next) = dfs.next(&gr) {
 
 This struct is defined at `src/visit/traversal.rs` within the `petgraph` crate.
 
+## Misc. Analysis Notes
+
+A general pseudo-code layout of the function would look something like this:
+
+```
+let reachable_items = // Collect the reachable items using Dfs, shown above.
+
+// Collect the items that are not reachable, collect them into a vector.
+let mut garbabe_items: Vec<_> = items
+  .iter()
+  .filter(|item| // item.id() not in reachable items)
+  .collect();
+
+garbage_items.sort_by(
+  // sort the items by size.
+});
+
+// Truncate the number of garbage items to be shown.
+garbage_items.truncate(opts.number() as usize);
+
+// Collect the id's of the garbage items.
+let garbage_items: Vec<_> = garbage_items.into_iter().map(|i| i.id()).collect();
+
+// Create the struct that we will return.
+let garbo = Garbage {
+  // ... (We will need to define a garbage struct.)
+}
+
+// Return the result in a boxed trait object. (?)
+Ok(Box::new(garbo) as Box<traits::Emit>)
+```
+

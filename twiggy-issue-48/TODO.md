@@ -11,6 +11,13 @@
 *  Add the source and resulting `.wasm` binary to the project under the test
    fixtures directory.
 
+## Options
+
+We will need to create a new item in the Options enum defined in `twiggy_opt`.
+
+*  Add definition to `definitions.rs`
+*  Add common cli options implementation to `opt.rs`
+
 ## Implementation
 
 *  Traverse items starting from the meta-root using `petgraph::visit::Dfs` (reachable)
