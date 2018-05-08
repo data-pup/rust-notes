@@ -207,3 +207,17 @@ let garbo = Garbage {
 Ok(Box::new(garbo) as Box<traits::Emit>)
 ```
 
+## Emit trait
+
+One of the common option settings for all of the subcommands is the output.
+The Emit trait is used to write objects to the given destination. Currently,
+this only consists of text and Json, which must be implemented using the
+following functions:
+
+```
+fn emit_text(&self, items: &ir::Items, destination: &mut io::Write) -> Result<(), Error>;
+fn emit_json(&self, items: &ir::Items, destination: &mut io::Write) -> Result<(), Error>;
+```
+
+Note that these traits are implemented in the `analyze.rs` file.
+
