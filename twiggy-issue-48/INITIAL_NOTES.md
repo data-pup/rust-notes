@@ -228,4 +228,3 @@ The `write!(dest, data)` macro is used to write information out. (surprise)
 
 Note: The `emit_json` function implementations seem a little opaque to me,
 and these might need a little bit of further review.
-
