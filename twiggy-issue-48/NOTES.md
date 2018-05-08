@@ -221,3 +221,6 @@ fn emit_json(&self, items: &ir::Items, destination: &mut io::Write) -> Result<()
 
 Note that these traits are implemented in the `analyze.rs` file.
 
+Note: These trait implementations use the table struct (and its helpers) to
+print a text representation.
+
